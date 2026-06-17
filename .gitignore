@@ -1,0 +1,38 @@
+﻿# Secrets and environment
+.env
+.env.local
+
+# Database files
+audit.db
+audit.db-shm
+audit.db-wal
+*.db
+*.db-shm
+*.db-wal
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg
+*.egg-info/
+dist/
+build/
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# VS Code
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
