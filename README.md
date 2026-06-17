@@ -154,7 +154,7 @@ This is a lite portfolio version. Production hardening would include:
 
 ## Author
 
-Built by Muhammad Bilal Nasir — AI Engineering portfolio project, 2026.
+Built by Muhammad Bilal Nasir.
 
 [![GitHub](https://img.shields.io/badge/GitHub-mbilalnasir751-181717?style=flat&logo=github)](https://github.com/mbilalnasir751)
 ```
