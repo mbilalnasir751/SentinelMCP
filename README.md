@@ -1,6 +1,3 @@
-Here is the complete README in one block — select all and paste into your `README.md`:
-
-```markdown
 # SentinelMCP
 
 > Local-first security and budget governance proxy for autonomous AI agents.
