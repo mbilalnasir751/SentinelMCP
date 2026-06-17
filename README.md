@@ -2,6 +2,8 @@
 
 > Local-first security and budget governance proxy for autonomous AI agents.
 
+![SentinelMCP catching a secret in real time](demo.gif)
+
 SentinelMCP sits between your AI agent and the LLM API. It silently scrubs secrets from outbound requests and kills runaway loops before they burn your token budget — all on localhost, zero cloud dependency.
 
 ---
@@ -49,8 +51,8 @@ SentinelMCP intercepts both before they happen.
 **Requirements:** Python 3.12+, Poetry
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/sentinelmcp
-cd sentinelmcp
+git clone https://github.com/mbilalnasir751/SentinelMCP
+cd SentinelMCP
 poetry install
 cp .env.example .env
 poetry run uvicorn sentinelmcp.main:app --host 127.0.0.1 --port 8000
@@ -152,4 +154,7 @@ This is a lite portfolio version. Production hardening would include:
 
 ## Author
 
-Built by Muhammad Bilal Nasir.
+Built by Muhammad Bilal Nasir — AI Engineering portfolio project, 2026.
+
+[![GitHub](https://img.shields.io/badge/GitHub-mbilalnasir751-181717?style=flat&logo=github)](https://github.com/mbilalnasir751)
+```
