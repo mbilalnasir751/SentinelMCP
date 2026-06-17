@@ -2,9 +2,35 @@
 
 > Local-first security and budget governance proxy for autonomous AI agents.
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Python](https://img.shields.io/badge/Python-3.12%2B-blue.svg)](https://www.python.org/downloads/)
+[![Tests](https://img.shields.io/badge/Tests-26%20passing-brightgreen.svg)]()
+[![FastAPI](https://img.shields.io/badge/FastAPI-async-009688.svg)](https://fastapi.tiangolo.com)
+[![Poetry](https://img.shields.io/badge/Poetry-package%20manager-60A5FA.svg)](https://python-poetry.org)
+
 ![SentinelMCP catching a secret in real time](demo.gif)
 
 SentinelMCP sits between your AI agent and the LLM API. It silently scrubs secrets from outbound requests and kills runaway loops before they burn your token budget — all on localhost, zero cloud dependency.
+
+---
+
+## Table of contents
+
+- [The problem it solves](#the-problem-it-solves)
+- [How it works](#how-it-works)
+- [Features](#features)
+- [Quick start](#quick-start)
+- [Live dashboard](#live-dashboard)
+- [Run tests](#run-tests)
+- [Configuration](#configuration)
+- [API reference](#api-reference)
+- [Detected secret patterns](#detected-secret-patterns)
+- [Troubleshooting](#troubleshooting)
+- [Production roadmap](#production-roadmap)
+- [Tech stack](#tech-stack)
+- [Contributing](#contributing)
+- [License](#license)
+- [Author](#author)
 
 ---
 
@@ -48,13 +74,20 @@ SentinelMCP intercepts both before they happen.
 
 ## Quick start
 
-**Requirements:** Python 3.12+, Poetry
+**Requirements:** [Python 3.12+](https://www.python.org/downloads/) and [Poetry](https://python-poetry.org/docs/#installation)
 
 ```bash
 git clone https://github.com/mbilalnasir751/SentinelMCP
 cd SentinelMCP
 poetry install
 cp .env.example .env
+```
+
+> The default values in `.env.example` work out of the box for local testing.
+> You do not need to edit anything before running the server.
+> Only change `TARGET_LLM_URL` if you want to proxy to a different LLM endpoint.
+
+```bash
 poetry run uvicorn sentinelmcp.main:app --host 127.0.0.1 --port 8000
 ```
 
@@ -63,6 +96,8 @@ Point your AI agent at `http://127.0.0.1:8000` instead of the LLM API directly.
 ---
 
 ## Live dashboard
+
+Open a second terminal and run:
 
 ```bash
 poetry run python -m sentinelmcp.dashboard
@@ -125,6 +160,44 @@ LOG_DB_PATH=audit.db
 
 ---
 
+## Troubleshooting
+
+**Port 8000 is already in use**
+
+Another service is occupying port 8000. Run the server on a different port:
+
+```bash
+poetry run uvicorn sentinelmcp.main:app --host 127.0.0.1 --port 8001
+```
+
+Then update your dashboard to point to the new port by editing this line in `sentinelmcp/dashboard.py`:
+
+```python
+SENTINEL_URL = "http://127.0.0.1:8001"
+```
+
+**ModuleNotFoundError: No module named sentinelmcp**
+
+The package is not installed in your virtual environment. Run:
+
+```bash
+poetry install
+```
+
+**Dashboard shows "Waiting for SentinelMCP to start"**
+
+The server is not running. Start it first in a separate terminal before launching the dashboard.
+
+**requests blocked with 429 immediately**
+
+Your circuit breaker tripped. Reset it by calling:
+
+```bash
+curl -X DELETE http://127.0.0.1:8000/_sentinel/reset/default
+```
+
+---
+
 ## Production roadmap
 
 This is a lite portfolio version. Production hardening would include:
@@ -149,6 +222,30 @@ This is a lite portfolio version. Production hardening would include:
 | Dashboard | Rich |
 | Package manager | Poetry |
 | Tests | pytest — 26 passing |
+
+---
+
+## Contributing
+
+Contributions are welcome. To get started:
+
+1. Fork the repository
+2. Create a feature branch: `git checkout -b feature/your-feature-name`
+3. Make your changes and add tests
+4. Ensure all tests pass: `poetry run pytest tests/ -v`
+5. Submit a pull request with a clear description of what you changed and why
+
+For bug reports and feature requests please open a GitHub issue.
+
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines on code style, commit messages, and the pull request process.
+
+---
+
+## License
+
+This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
+
+MIT means you are free to use, modify, and distribute this project for both personal and commercial purposes as long as the original license notice is included.
 
 ---
 
