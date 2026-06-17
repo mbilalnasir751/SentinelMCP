@@ -155,4 +155,4 @@ This is a lite portfolio version. Production hardening would include:
 
 ## Author
 
-Built by Bilal Nasir — AI Engineering portfolio project, 2026.
+Built by Muhammad Bilal Nasir.
