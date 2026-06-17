@@ -216,3 +216,8 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+# SentinelMCP specific
+.env
+audit.db
+audit.db-shm
+audit.db-wal
